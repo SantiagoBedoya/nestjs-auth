@@ -1,0 +1,55 @@
+@BASE_URL=http://localhost:3000/api
+
+### register
+POST {{BASE_URL}}/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "SantiagoBedoya",
+  "email": "santiago@google.com",
+  "password": "santiago123"
+}
+
+### local auth
+POST {{BASE_URL}}/auth/local HTTP/1.1
+Content-Type: application/json
+
+{
+  "username": "SantiagoBedoya",
+  "password": "santiago123"
+}
+
+### basic auth
+POST {{BASE_URL}}/auth/basic HTTP/1.1
+Authorization: Basic SantiagoBedoya:santiago123
+
+### oauth
+GET {{BASE_URL}}/auth/oauth?client_id=63b9f042772493da6e9e1536&callback_url=http://127.0.0.1:3000/api/auth/oauth/callback HTTP/1.1
+
+### get users
+GET {{BASE_URL}}/users HTTP/1.1
+
+### get clients
+GET {{BASE_URL}}/clients HTTP/1.1
+api-key: 123
+
+### get client
+GET {{BASE_URL}}/clients/63b9f042772493da6e9e1536 HTTP/1.1
+
+### create client
+POST {{BASE_URL}}/clients HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+  "name": "Client 2",
+  "callbackURL": "http://127.0.0.1:3000/callback"
+}
+
+### update client
+PATCH {{BASE_URL}}/clients/63b9f042772493da6e9e1536 HTTP/1.1
+Content-Type: application/json
+
+{
+  "callbackURL": "http://127.0.0.1:3000/api/auth/oauth/callback"
+}
